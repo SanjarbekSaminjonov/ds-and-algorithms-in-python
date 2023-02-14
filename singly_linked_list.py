@@ -9,17 +9,17 @@ class Node:
 
 class SinglyLinkedList:
     def __init__(self):
-        self.head: Optional[Node] = None
+        self._head: Optional[Node] = None
 
     def __iter__(self):
-        curr = self.head
+        curr = self._head
         while curr:
             yield curr.data
             curr = curr.next
 
     def __len__(self):
         count = 0
-        curr = self.head
+        curr = self._head
         while curr:
             curr = curr.next
             count += 1
@@ -33,18 +33,18 @@ class SinglyLinkedList:
             new_node = Node(data)
         elif new_node is None:
             return
-        if self.head is None:
-            self.head = new_node
+        if self._head is None:
+            self._head = new_node
             return
-        curr = self.head
+        curr = self._head
         while curr.next:
             curr = curr.next
         curr.next = new_node
 
     def prepend(self, data):
         new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
+        new_node.next = self._head
+        self._head = new_node
 
     @staticmethod
     def insert_after_node(prev_node: Node, data):
@@ -53,9 +53,9 @@ class SinglyLinkedList:
         prev_node.next = new_node
 
     def delete_by_value(self, data):
-        curr = self.head
+        curr = self._head
         if curr and curr.data == data:
-            self.head = curr.next
+            self._head = curr.next
             return
         prev = None
         while curr and curr.data != data:
@@ -66,9 +66,9 @@ class SinglyLinkedList:
         prev.next = curr.next
 
     def delete_by_position(self, postion):
-        curr = self.head
+        curr = self._head
         if curr and postion == 0:
-            self.head = curr.next
+            self._head = curr.next
             return
         prev = None
         count = 0
