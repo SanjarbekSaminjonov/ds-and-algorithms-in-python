@@ -111,6 +111,29 @@ class SinglyLinkedList:
 
         curr1.next, curr2.next = curr2.next, curr1.next
 
+    def reverse_iterative(self):
+        prev = None
+        curr = self._head
+        while curr:
+            next_ = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_
+        self._head = prev
+
+    def reverse_recursive(self):
+        def _revese(curr, prev):
+            if curr is None:
+                return prev
+            next_ = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_
+            return _revese(curr, prev)
+
+        head = self._head
+        self._head = _revese(head, None)
+
 
 if __name__ == '__main__':
     llist = SinglyLinkedList()
@@ -124,7 +147,9 @@ if __name__ == '__main__':
     llist.append(5)
     # llist.delete_by_value(3)
     # llist.delete_by_position(1)
+    # llist.swap_nodes(1, 5)
 
     print(llist)
-    llist.swap_nodes(2, 3)
+    llist.reverse_recursive()
+    llist.reverse_iterative()
     print(llist)
